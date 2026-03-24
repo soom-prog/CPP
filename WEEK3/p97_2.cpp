@@ -20,6 +20,8 @@ void pattern1(int num)
         else if (i==3) std::cout << "십";
     }
     std::cout << std::endl;
+
+    std::vector<int> v 
 }
 
 #include <iostream>

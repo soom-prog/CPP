@@ -1,6 +1,6 @@
 #include <iostream>
 
-int main()
+int main()              //main 함수 입력
 {
     for(int i = 1; i <= 5; ++i)
     {

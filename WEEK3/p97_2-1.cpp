@@ -12,7 +12,7 @@ int main()
         else if (i==1) number = (num/1000)%10;
         else if (i==2) number = (num/100)%10;
         else if (i==3) number = (num/10)%10;
-        else number = num %10;                  //없이 진행했을때 일의 자리에 숫자가 이상하게 출력되어 GPT를 이용해 보완
+        else number = num %10;                  //없이 진행했을때 일의 자리에 숫자가 이상하게 출력되어 GPT를 이용해 보완 이렇게 해야 마지막 일의 자리 숫자가 정확하게 출력
 
         std::cout << number;
 

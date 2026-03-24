@@ -1,6 +1,6 @@
 #include <iostream>
 
-void pattern1()
+void pattern1()                 //빈공간 void 에 pattern1 을 지정해줌
 {
     for(int i = 1; i <= 5; ++i)
     {
