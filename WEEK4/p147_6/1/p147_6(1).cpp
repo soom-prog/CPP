@@ -1,11 +1,11 @@
-#include "p147_6(1).hpp"
+#include "p147_6(1).hpp"                                                                    //설정 헤드파일 불러오기
 
-static int Numgames = 0;
-static int NumWins = 0;
-static double Score = 0;
-double tElapsed = 0;
+static int Numgames = 0;                                                                    //교재내용 참고
+static int NumWins = 0;                                                                     //맞춘 횟수
+static double Score = 0;                                                                    //점수
+double tElapsed = 0;                                                                        //앞 헤더 파일에서 가져올 소요시간 ((변수지정))
 
-static bool playPlusOnce()
+static bool playPlusOnce()                                                                  
 {
     int a = rand() %1000 + 1;
     int b = rand() %1000 + 1;
@@ -19,7 +19,7 @@ static bool playPlusOnce()
     return (result == a+b);
 }
 
-double playSpeedPlus(int nPlay)
+double playSpeedPlus(int nPlay)                                                             //헤더파일에서 지정했던 plaaySpeedPlus 함수에 대입
 {
     clock_t t0 = clock();
 
@@ -37,7 +37,7 @@ double playSpeedPlus(int nPlay)
     Score = 100.0 * ((double)NumWins / Numgames)
                 * ((20.0 * Numgames - tElapsed) / (20.0 * Numgames));       //문제당 기준시간 20초
 
-    if (Score < 0) Score = 0;
+    if (Score < 0) Score = 0;                                               //시간오버에서 점수가 음수 나오기 방지
 
     printf("\n맞은 개수: %d / %d\n", NumWins, Numgames);
     printf("점수: %.1f점\n", Score);
