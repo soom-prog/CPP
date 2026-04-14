@@ -11,21 +11,21 @@ enum LabelType { Empty = 0, Bomb = 9 };
 enum MaskType { Hide = 0, Open, Flag };
 static int MineMapMask[40][80];
 static int MineMapLabel[40][80];
-int nx = DIM, ny = DIM;
+static int nx = DIM, ny = DIM;
 static int nBomb = DIM;
 
-// ÀÛÀº ÇïÆÛ ÇÔ¼öµé
+// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½
 inline int& mask(int x, int y) { return MineMapMask[y][x]; }
 inline int& label(int x, int y) { return MineMapLabel[y][x]; }
 inline bool isValid(int x, int y) { return (x >= 0 && x < nx && y >= 0 && y < ny); }
 inline bool isBomb(int x, int y) { return isValid(x, y) && label(x, y) == Bomb; }
 inline bool isEmpty(int x, int y) { return isValid(x, y) && label(x, y) == Empty; }
 
-// Áö·Ú Å½»ö
+// ï¿½ï¿½ï¿½ï¿½ Å½ï¿½ï¿½
 static bool dig(int x, int y) {
     if (!isValid(x, y) || mask(x, y) == Open) return false;
     mask(x, y) = Open;
-    if (isBomb(x, y)) return true; // Æø¹ß
+    if (isBomb(x, y)) return true; // ï¿½ï¿½ï¿½ï¿½
     if (label(x, y) == 0) {
         for (int dy = -1; dy <= 1; dy++)
             for (int dx = -1; dx <= 1; dx++)
@@ -35,13 +35,13 @@ static bool dig(int x, int y) {
     return false;
 }
 
-// ±ê¹ß Ç¥½Ã
+// ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½
 static void mark(int x, int y) {
     if (isValid(x, y) && mask(x, y) == Hide)
         mask(x, y) = Flag;
 }
 
-// ±ê¹ß °¹¼ö
+// ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 static int getBombCount() {
     int count = 0;
     for (int y = 0; y < ny; y++)
@@ -50,28 +50,28 @@ static int getBombCount() {
     return count;
 }
 
-// È­¸é Ãâ·Â (Ä¿¼­ °­Á¶)
+// È­ï¿½ï¿½ ï¿½ï¿½ï¿½ (Ä¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
 static void print(int cursorX, int cursorY) {
     system("cls");
-    printf("   ¹ß°ß:%2d   ÀüÃ¼:%2d\n", getBombCount(), nBomb);
+    printf("   ï¿½ß°ï¿½:%2d   ï¿½ï¿½Ã¼:%2d\n", getBombCount(), nBomb);
 
-    // ¿­ ¹øÈ£
+    // ï¿½ï¿½ ï¿½ï¿½È£
     printf("    ");
     for (int x = 0; x < nx; x++)
         printf("%2d", x + 1);
     printf("\n");
 
     for (int y = 0; y < ny; y++) {
-        printf("%2d ", y + 1); // Çà ¹øÈ£
+        printf("%2d ", y + 1); // ï¿½ï¿½ ï¿½ï¿½È£
         for (int x = 0; x < nx; x++) {
-            if (x == cursorX && y == cursorY) { // ¼±ÅÃ Ä­ °­Á¶
-                printf("[¡á]");
+            if (x == cursorX && y == cursorY) { // ï¿½ï¿½ï¿½ï¿½ Ä­ ï¿½ï¿½ï¿½ï¿½
+                printf("[ï¿½ï¿½]");
             } else if (mask(x, y) == Hide) {
-                printf("[¡à]");
+                printf("[ï¿½ï¿½]");
             } else if (mask(x, y) == Flag) {
                 printf("[?]");
             } else {
-                if (isBomb(x, y)) printf("[¡Ø]");
+                if (isBomb(x, y)) printf("[ï¿½ï¿½]");
                 else if (isEmpty(x, y)) printf("[  ]");
                 else printf("[%d]", label(x, y));
             }
@@ -80,7 +80,7 @@ static void print(int cursorX, int cursorY) {
     }
 }
 
-// ÁÖº¯ Áö·Ú ¼ö
+// ï¿½Öºï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 static int countNbrBombs(int x, int y) {
     int count = 0;
     for (int yy = y - 1; yy <= y + 1; yy++)
@@ -90,7 +90,7 @@ static int countNbrBombs(int x, int y) {
     return count;
 }
 
-// ÃÊ±âÈ­
+// ï¿½Ê±ï¿½È­
 static void init(int total = 9) {
     srand((unsigned int)time(NULL));
     for (int y = 0; y < ny; y++)
@@ -113,27 +113,27 @@ static void init(int total = 9) {
                 label(x, y) = countNbrBombs(x, y);
 }
 
-// Ä¿¼­·Î À§Ä¡ ¼±ÅÃ
+// Ä¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½
 static bool getPos(int& x, int& y) {
     x = 0; y = 0;
     while (true) {
-        print(x, y); // ÇöÀç À§Ä¡ °­Á¶
+        print(x, y); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½
         int key = _getch();
-        if (key == 224) { // È­»ìÇ¥
+        if (key == 224) { // È­ï¿½ï¿½Ç¥
             key = _getch();
-            if (key == 72 && y > 0) y--;        // ¡è
-            else if (key == 80 && y < ny - 1) y++; // ¡é
-            else if (key == 75 && x > 0) x--;    // ¡ç
-            else if (key == 77 && x < nx - 1) x++; // ¡æ
+            if (key == 72 && y > 0) y--;        // ï¿½ï¿½
+            else if (key == 80 && y < ny - 1) y++; // ï¿½ï¿½
+            else if (key == 75 && x > 0) x--;    // ï¿½ï¿½
+            else if (key == 77 && x < nx - 1) x++; // ï¿½ï¿½
         } else if (key == 'p' || key == 'P') {
-            return true; // ±ê¹ß
+            return true; // ï¿½ï¿½ï¿½
         } else if (key == 13) {
             return false; // Dig
         }
     }
 }
 
-// ¿Ï·á Ã¼Å©
+// ï¿½Ï·ï¿½ Ã¼Å©
 static int checkDone() {
     int count = 0;
     for (int y = 0; y < ny; y++)
@@ -144,7 +144,7 @@ static int checkDone() {
     return (count == nBomb) ? 1 : 0;
 }
 
-// °ÔÀÓ ½ÇÇà
+// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 void playMineSweeper(int total) {
     int x, y, status;
     init(total);
@@ -156,12 +156,12 @@ void playMineSweeper(int total) {
         status = exploded ? -1 : checkDone();
     } while (status == 0);
 
-    print(-1, -1); // Á¾·á ½Ã Ä¿¼­ Á¦°Å
+    print(-1, -1); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ Ä¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     if (status < 0)
-        printf("\n½ÇÆÐ: Áö·Ú Æø¹ß!!!\n\n");
+        printf("\nï¿½ï¿½ï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½!!!\n\n");
     else
-        printf("\n¼º°ø: Å½»ö ¼º°ø!!!\n\n");
+        printf("\nï¿½ï¿½ï¿½ï¿½: Å½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½!!!\n\n");
 
-    printf("¾Æ¹« Å°³ª ´­·¯ Á¾·á...");
+    printf("ï¿½Æ¹ï¿½ Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½...");
     _getch();
 }

@@ -1,13 +1,22 @@
+#pragma once
 #include <iostream>
+using namespace std;
 
-struct MyTime
+class MyTime
 {
+private:
     int hour;
     int min;
     int sec;
+    
+public:
+    void convert(double duration);
+    void print();
+    MyTime add (MyTime t);
+    void reset();
 };
 
-MyTime addTime(MyTime t1, MyTime t2)
+inline void MyTime addTime(MyTime t1, MyTime t2)
 {
     MyTime result;
     result.hour = t1.hour + t2.hour;
