@@ -33,6 +33,10 @@ public:
 		nItem(0), nEnergy(energy) {
 	}
 
+	int getEnergy(){
+		return nEnergy;									// (2)
+	}
+
 	~Monster() { cout << "\t" << name << icon << " 물러갑니다~~~\n"; }
 	
 	void draw(Canvas &canvas) { canvas.draw(x, y, icon); }

@@ -21,7 +21,9 @@ class Monster {
 			nEnergy += 8;		// (3) 아이템을 먹으면 에너지 8증가
 		}
 	}
+
 public:
+
 	Monster(string n = "몬스터",
 		string i = "M ",
 		int px = 0,
@@ -31,11 +33,21 @@ public:
 		: name(n), icon(i),
 		x(px), y(py),
 		nItem(0), nEnergy(energy) {
+
+		nMonsters++;			// 생성 시 몬스터 수 증가
 	}
 
-	~Monster() { cout << "\t" << name << icon << " 물러갑니다~~~\n"; }
+	~Monster() {
+
+		nMonsters--;			// 소멸 시 몬스터 수 감소
+
+		cout << "\t"
+			<< name
+			<< icon
+			<< " 물러갑니다~~~\n";
+	}
 	
-	void draw(Canvas &canvas) { canvas.draw(x, y, icon); }
+	void draw(Canvas& canvas) { canvas.draw(x, y, icon); }
 
 	void move(int map[DIM][DIM], int maxx, int maxy) {
 		switch (rand() % 8) {
@@ -47,7 +59,6 @@ public:
 		case 5: x--; y++; break;
 		case 6: x--; break;
 		case 7: x--; y--; break;
-		nEnergy--;
 		}
 
 
@@ -75,11 +86,24 @@ public:
 		else if (nEnergy > 0)
 			cout << " [LOW]";
 		else
-			cout << " [DEAD]";			//(4) 현재의 에너지 레벨 출력
+			cout << " [아사]";			//(4) 현재의 에너지 레벨 출력
 
 		cout << endl;
 	}
 	bool isDead() {
-    return nEnergy <= 0;
+
+		return nEnergy <= 0;
+	}
+
+	int getEnergy() {
+
+		return nEnergy;
+	}
+
+	static void printCount() {
+
+		cout << "전체 몬스터의 수 : "
+			<< nMonsters
+			<< endl;
 	}
 };

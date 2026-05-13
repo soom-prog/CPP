@@ -1,16 +1,18 @@
 #include "MonsterWorld.h"
 #include <time.h>
-void main()
+int main()
 {
 	srand((unsigned int)time(NULL));
 	int w = 16, h = 8;
 
 	MonsterWorld game(w, h);
-	Monster m("¸ó½ºÅÍ", "¡Ø", rand() % w, rand() % h);
+	Monster m("ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½", rand() % w, rand() % h);
 	game.add(m);
-	game.add(Monster("µµ±úºñ", "¡Ý", rand() % w, rand() % h));
-	game.add(Monster("º°±×´ë", "¡Ú", rand() % w, rand() % h));
-	game.add(Monster("°í½ºÆ®", "¢¾", rand() % w, rand() % h));
+	game.add(Monster("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½", rand() % w, rand() % h));
+	game.add(Monster("ï¿½ï¿½ï¿½×´ï¿½", "ï¿½ï¿½", rand() % w, rand() % h));
+	game.add(Monster("ï¿½ï¿½ï¿½ï¿½Æ®", "ï¿½ï¿½", rand() % w, rand() % h));
 	game.play(500, 10);
-	printf("------°ÔÀÓ Á¾·á-------------------\n");
+	printf("------ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½-------------------\n");
+
+	return 0;
 }
